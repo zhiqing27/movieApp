@@ -1,14 +1,9 @@
-import { Badge,Grid } from "@material-ui/core";
-import { Icon } from '@iconify/react';
+import { Grid } from "@material-ui/core";
 import React from "react";
 const img_300 = "https://image.tmdb.org/t/p/w300";
-const img_500 = "https://image.tmdb.org/t/p/w500";
 const unavailable =
     "https://www.movienewz.com/img/films/poster-holder.jpg";
 import "../Shared/Content.css";
-import { useState } from "react";
-import axios from "axios";
-
 const Actor = ({
     id,
     known_for_department,

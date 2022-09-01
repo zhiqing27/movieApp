@@ -89,9 +89,8 @@ const Content = ({
                     </div>
                 </div>
             </Grid>
-
             <Dialog
-                fullWidth="true"
+                fullWidth={true}
                 maxWidth="md"
                 open={open}
                 scroll="paper"

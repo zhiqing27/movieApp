@@ -17,7 +17,7 @@ const Movie = () => {
     const [thisYear, selectedYear] = useState("");
     useEffect(() => {
         window.scroll(0, 0);
-        getSelected("");
+        getSelected(selected)
         // eslint-disable-next-line
     }, [page]);
     useEffect(() => {
@@ -51,17 +51,20 @@ const Movie = () => {
         } else{
             id = dt.id
         }
+
         var byDate="";
+        var yr1="";
         var url = `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&sort_by=vote_count.desc&include_adult=false&include_video=false&with_watch_monetization_types=flatrate&page=${page}`;
         if(typeof yr!="undefined"){
             if(yr!=""){
-                byDate=`&primary_release_year=${yr}`
+                yr1=yr;
             }
         }else{
             if(thisYear!=""){
-                byDate=`&primary_release_year=${thisYear}`
+                yr1 =thisYear;
             }
         }
+        byDate=`&primary_release_year=${yr1}`
       let y=[];
         if(id!=""|| typeof id!="undefined"){
             if (selected.findIndex((x) => x === id) == -1) {
@@ -70,7 +73,6 @@ const Movie = () => {
                 y.push(id);
             } else {
                 var array = [...selected];
-                 // make a separate copy of the array
                 var index = array.indexOf(id)
                 if (index !== -1) {
                     array.splice(index, 1);
@@ -97,11 +99,19 @@ const Movie = () => {
         const data = await axios.get(
             url
         );
-        setMovies(data.data.results);
-        if (url != `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&sort_by=vote_count.desc&include_adult=false&include_video=false&page=${page}`) {
-            setTotalPage(data.data.total_pages);
-        } else {
-            setTotalPage(10);
+        if(data.data.results.length==0){
+            setMovies([]);
+        }else{
+            setMovies(data.data.results);
+            if (url != `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&sort_by=vote_count.desc&include_adult=false&include_video=false&page=${page}`) {
+             var pg=data.data.total_pages;
+            if(data.data.total_pages>=500){
+                pg=500;
+            }  
+            setTotalPage(pg);
+            } else {
+                setTotalPage(10);
+            }
         }
    }
     return (
@@ -152,7 +162,9 @@ const Movie = () => {
                         />
                     ))}
             </div>
-            <PaginationElement setPage={setPage} numOfPages={totalPage} />
+            {
+                movies.length > 0 ? <PaginationElement setPage={setPage} numOfPages={totalPage} /> : <></>
+            }
         </div>
     )
 }

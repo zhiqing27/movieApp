@@ -47,7 +47,6 @@ const Search = () => {
     useEffect(() => {
         window.scroll(0, 0);
         fetchSearch();
-        // eslint-disable-next-line
       }, [page]);
       useEffect(() => {
         window.scroll(0, 0);
@@ -115,7 +114,6 @@ const Search = () => {
                         variant="outlined"
                         onChange={(e) => setSearchText(e.target.value)}
                         onKeyDown={handleKeyDown}
-
                     />
                     <Button
                         variant="contained"

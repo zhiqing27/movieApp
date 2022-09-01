@@ -25,7 +25,6 @@ const PaginationElement = ({ setPage, numOfPages  }) => {
             <Pagination className={classes.root}
                 count={numOfPages}
                 color="primary"
-                // shape="rounded"
                 size="large"
                 hideNextButton
                 hidePrevButton
