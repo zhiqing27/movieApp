@@ -67,7 +67,7 @@ const Content = ({
     }
     return (
         <>
-            <Grid item xs={12} md>
+            <Grid item xs={6} md>
                 <div>
                     <div onClick={() => {
                         getMovie(id, media_type)
