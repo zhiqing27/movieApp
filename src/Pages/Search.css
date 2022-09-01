@@ -1,0 +1,11 @@
+.search{
+    display: flex;
+    margin: 15px 0;
+    padding-top: 30px;
+  }
+  .searchBox{
+    color: white;
+  }
+  .searchSc{
+    padding-top: 70px;
+  }
